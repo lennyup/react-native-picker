@@ -30,8 +30,11 @@ export default class PickerAny extends Component {
 		pickerBtnStyle: Text.propTypes.style,
 		pickerTitle: PropTypes.string,
 		pickerTitleStyle: Text.propTypes.style,
+		pickerCancelBtnStyle: Text.propTypes.style,
 		pickerToolBarStyle: View.propTypes.style,
+		pickerBoxStyle: View.propTypes.style,
 		showMask: PropTypes.bool,
+		showModal: PropTypes.bool,
 		showDuration: PropTypes.number,
 		pickerData: PropTypes.any.isRequired,
 		selectedValue: PropTypes.any.isRequired,
@@ -47,6 +50,7 @@ export default class PickerAny extends Component {
 		pickerBtnText: 'Done',
 		pickerCancelBtnText: 'Cancel',
 		showMask: false,
+		showModal: false,
 		showDuration: 300,
 		onPickerDone: ()=>{},
 		onPickerCancel: ()=>{},
@@ -416,10 +420,10 @@ export default class PickerAny extends Component {
 				bottom: this.state.slideAnim
 			}]}>
 				{mask}
-				<View style={[styles.pickerBox, this.state.style]}>
+				<View style={[styles.pickerBox, this.state.style, this.state.pickerBoxStyle]}>
 					<View style={[styles.pickerToolbar, this.state.pickerToolBarStyle, {width: this.state.style.width || width}]}>
 						<View style={styles.pickerCancelBtn}>
-							<Text style={[styles.pickerFinishBtnText, this.state.pickerBtnStyle]}
+							<Text style={[styles.pickerFinishBtnText, this.state.pickerBtnStyle, this.state.pickerCancelBtnStyle]}
 								onPress={this._pickerCancel.bind(this)}>{this.state.pickerCancelBtnText}</Text>
 						</View>
 						<Text style={[styles.pickerTitle, this.state.pickerTitleStyle]} numberOfLines={1}>
@@ -455,7 +459,7 @@ let styles = StyleSheet.create({
 	mask: {
 		position: 'absolute',
 		top: 0,
-		backgroundColor: 'transparent',
+		backgroundColor: 'rgba(0, 0, 0, 0.2)',
 		height: height,
 		width: width
 	},
